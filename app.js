@@ -20,50 +20,49 @@ const wordBank = [
     "basket"
 ]
 
-let finished = false;
-
 let letters = document.getElementById("letters");
-let inputLetter = document.getElementById("inputLetter");
+let inputSpace = document.getElementById("inputLetter");
 
 function main() {
     // choose index of random word
     let chosenWordNum = randomWord();
     // get chosen word and length of word
-    let chosenWord = wordBank[chosenWordNum];
-    let chosenWordLength = chosenWord.length;
+    let chosenWord = wordBank[chosenWordNum],
+        chosenWordLength = chosenWord.length;
     // set blanks according to the length of the random word
     let blankText = "_ ".repeat(chosenWordLength);
     letters.innerText = blankText;
+    console.log(chosenWord);
+    // initial string to compare with the chosen word
+    let compareString = "_ ".repeat(chosenWordLength);
+    // number of rightly guessed letters
+    let validGuessNum = 0;
 
-    inputLetter.addEventListener('keydown', function (e){
-        // length of input must be 1
-        console.log(`Input: ${e.key} ${e.key.length}`);
-        if (e.key.length !== 1){
-            console.log("Invalid length of input");
-        }
-        let inputLetter = e.key,
-            inputAscii = e.key.charCodeAt(0);
-        let isUppercase = (inputAscii >= 65) && (inputAscii <= 90),
-            isLowercase = (inputAscii >= 97) && (inputAscii <= 122);
-        console.log(`Input 2: ${inputAscii}`);
-
-        if((e.key !== 'Enter') && isUppercase || isLowercase){
-            // check if letter is in chosen word
-
+    inputLetter.addEventListener('keydown', function guess(e){
+        
+        // console.log(`Input: ${e.key} ${e.key.length}`);
+        let inputLetter = e.key;
+        
+        if(inputLetter === "Enter"){
+            console.log("Enter");
+            inputSpace.value = "";
         }
         else{
-            console.log("Invalid type of input text");
-        }
-
-        if(finished){
-            removeEventListener();
-        }
-
+            for(let i = 0; i < chosenWordLength; i++){
+                if (chosenWord[i] === inputLetter){
+                    compareString = setCharAt(compareString, 2*i, inputLetter);
+                    compareString = setCharAt(compareString, 2*i+1, " ");
+                    validGuessNum++;
+                }
+            }
+            console.log(`Final compareString: ${compareString}`);
+            letters.innerText = compareString;
+            console.log(`GuessNum: ${validGuessNum} WordLength:${chosenWordLength}`);
+            if(validGuessNum === chosenWordLength){
+                console.log("End");
+            }
+        }    
     });
-
-        // let letter = inputLetter.;
-        // console.log(letter);
-    // }
 }
 
 const randomWord = () => {
@@ -71,6 +70,9 @@ const randomWord = () => {
     return Math.floor(Math.random() * arrLength);
 }
 
+const setCharAt = (str, index, letter) =>{
+    return str.substring(0, index) + letter + str.substring(index+1);
+}
 
 main();
 
