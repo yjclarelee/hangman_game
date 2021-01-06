@@ -1,0 +1,40 @@
+html { 
+    background: url("./src/hangman_bottom.png") no-repeat center center fixed; 
+    /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+  }
+
+body{
+    text-align: center;
+}
+
+h1{
+    margin: 2em 0em 1em 0em;
+    font-size: 50px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#letters{
+    font-size: 50px;
+}
+
+#inputLetter{
+    font-size: 40px;
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid black;
+    background-color: transparent;
+    
+}
+
+input::placeholder{
+    font-size: 30px;
+}
+
+input:focus{
+    outline: none;
+}
