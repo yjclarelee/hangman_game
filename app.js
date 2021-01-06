@@ -242,7 +242,7 @@ function main() {
         else{
             // for each letter in the chosen word, compare with the input letter
             for(let i = 0; i < chosenWordLength; i++){
-                if (chosenWord[i] === inputLetter){
+                if (chosenWord[i] === inputLetter.toLowerCase()){
                     // the compareString has spaces so the index must be calculated
                     compareString = setCharAt(compareString, 2*i, inputLetter);
                     compareString = setCharAt(compareString, 2*i+1, " ");
