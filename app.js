@@ -233,9 +233,11 @@ function main() {
     inputLetter.addEventListener('keydown', function guess(e){
         
         // console.log(`Input: ${e.key} ${e.key.length}`);
-        let inputLetter = e.key;
+        let inputLetter = e.key.toLowerCase();
         // if the input is enter, clear the input space
-        if(inputLetter === "Enter"){
+        if(inputLetter === "enter"){
+            // set the letters to be the resulting compareString
+            letters.innerText = compareString;
             inputSpace.value = "";
         }
         // if the input is not a letter, compare the input with letters in the chosen word
@@ -252,8 +254,6 @@ function main() {
                 }
             }
             // after setting the string with letters that are in the input letter
-            // set the letters to be the resulting compareString
-            letters.innerText = compareString;
             // if the number of right guess letters is the same as the chosen word length
             // finish the program comes to an end
             if(validGuessNum === chosenWordLength){
