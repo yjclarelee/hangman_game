@@ -215,7 +215,7 @@ const wordBank = [
 let letters = document.getElementById("letters");
 let inputSpace = document.getElementById("inputLetter");
 
-function main() {
+function render() {
     // choose index of random word
     let chosenWordNum = randomWord();
     // get chosen word and length of word
@@ -272,4 +272,4 @@ const setCharAt = (str, index, letter) =>{
     return str.substring(0, index) + letter + str.substring(index+1);
 }
 
-main();
+render();
