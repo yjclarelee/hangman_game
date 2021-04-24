@@ -216,15 +216,11 @@ let letters = document.getElementById("letters");
 let inputSpace = document.getElementById("inputLetter");
 
 function render() {
-    // choose index of random word
-    let chosenWordNum = randomWord();
-    // get chosen word and length of word
-    let chosenWord = wordBank[chosenWordNum],
-        chosenWordLength = chosenWord.length;
-    // set blanks according to the length of the random word
-    let blankText = "_ ".repeat(chosenWordLength);
-    letters.innerText = blankText;
-    console.log(chosenWord);
+    const chosenWord = wordBank[randomWordIndex];
+    const chosenWordLength = chosenWord.length;
+    
+    letters.innerText = "_ ".repeat(chosenWordLength);;
+
     // initial string to compare with the chosen word
     let compareString = "_ ".repeat(chosenWordLength);
     // number of rightly guessed letters
@@ -263,7 +259,7 @@ function render() {
     });
 }
 
-const randomWord = () => {
+const randomWordIndex = () => {
     let arrLength = wordBank.length;
     return Math.floor(Math.random() * arrLength);
 }
