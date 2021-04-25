@@ -51,14 +51,18 @@ const playGame = (answer, compareString) => {
             letters.innerText = compareString;
             inputSpace.value = "";
             if(validLetterNum >= answer.length){
-                console.log("End");
+                alert(`The answer is: ${answer}`);
+                render();
             }
         }
         else{
             for(let i = 0; i < answer.length; i++){
-                if (answer[i] === inputLetter){
-                    compareString = setCharAt(compareString, 2*i, inputLetter);
+                if (answer[i] == inputLetter && compareString[2*i] == '_'){
+                    compareString = setCharAt(compareString, 2 * i, inputLetter);
                     validLetterNum++;
+                }
+                else {
+                    
                 }
             }
         }    
