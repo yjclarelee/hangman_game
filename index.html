@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Hangman Game" />
+    <meta property="og:type" content="webpage" />
+    <meta property="og:url" content="https://yjclarelee.github.io/hangman_game/" />
+    <meta property="og:image" content="./assets/img/hangman_bottom.png" />
+    <meta property="og:description" content="Text based hangman game. Come and play!" />
     <script type="module" src="./assets/js/app.js" defer></script>
     <link rel="stylesheet" href="./assets/css/style.css" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
     <title>Hangman Game</title>
 </head>
 <body>
-    <h1>Hangman Game</h1>
-    <p id="letters">_ _ _</p>
-    <input type="text" id="inputLetter" placeholder="Enter a letter" size="10">
+    <section class="center">
+        <h1>Hangman Game</h1>
+        <p id="letters">_ _ _</p>
+        <input type="text" id="inputLetter" placeholder="Enter a letter" size="10">
+        <p class="wrong_letters"></p>
+    </section>
 </body>
 </html>
