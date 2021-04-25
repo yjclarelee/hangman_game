@@ -16,57 +16,62 @@ import { wordBank } from "./wordbank.js";
 let letters = document.getElementById("letters");
 let inputSpace = document.getElementById("inputLetter");
 
-const randomWordIndex = () => {
-    let arrLength = wordBank.length;
-    return Math.floor(Math.random() * arrLength);
+/**
+ * setGame()
+ * sets the answer and blanks
+ * @returns answer: string, compareString: string;
+ */
+
+const setGame = () => {
+    const answer = getAnswer();
+    setBlanks(answer);
+    let compareString = getCompareString(answer);
+    return { answer, compareString };
 }
 
-const setCharAt = (str, index, letter) =>{
-    return str.substring(0, index) + letter + str.substring(index+1);
+const getAnswer = () => {
+    return wordBank[Math.floor(Math.random() * wordBank.length)];
 }
 
-function render() {
-    const chosenWord = wordBank[randomWordIndex()];
-    const chosenWordLength = chosenWord.length;
-    
-    letters.innerText = "_ ".repeat(chosenWordLength);;
+const setBlanks = (answer) => {
+    letters.innerText = "_ ".repeat(answer.length);
+}
 
-    // initial string to compare with the chosen word
-    let compareString = "_ ".repeat(chosenWordLength);
-    // number of rightly guessed letters
-    let validGuessNum = 0;
+const getCompareString = (answer) => {
+    return "_ ".repeat(answer.length);
+}
 
-    inputLetter.addEventListener('keydown', function guess(e){
-        
-        // console.log(`Input: ${e.key} ${e.key.length}`);
+const playGame = (answer, compareString) => {
+    let validLetterNum = 0;
+    inputSpace.addEventListener('keydown', function guess(e){
         let inputLetter = e.key.toLowerCase();
         // if the input is enter, clear the input space
         if(inputLetter === "enter"){
             // set the letters to be the resulting compareString
             letters.innerText = compareString;
             inputSpace.value = "";
-        }
-        // if the input is not a letter, compare the input with letters in the chosen word
-        else{
-            // for each letter in the chosen word, compare with the input letter
-            for(let i = 0; i < chosenWordLength; i++){
-                if (chosenWord[i] === inputLetter.toLowerCase()){
-                    // the compareString has spaces so the index must be calculated
-                    compareString = setCharAt(compareString, 2*i, inputLetter);
-                    compareString = setCharAt(compareString, 2*i+1, " ");
-                    // if the input letter is the same as the chosen word's letter
-                    // add 1 to the validGuessNum
-                    validGuessNum++;
-                }
-            }
-            // after setting the string with letters that are in the input letter
-            // if the number of right guess letters is the same as the chosen word length
-            // finish the program comes to an end
-            if(validGuessNum === chosenWordLength){
+            if(validLetterNum >= answer.length){
                 console.log("End");
+            }
+        }
+        else{
+            for(let i = 0; i < answer.length; i++){
+                if (answer[i] === inputLetter){
+                    compareString = setCharAt(compareString, 2*i, inputLetter);
+                    validLetterNum++;
+                }
             }
         }    
     });
+}
+
+const setCharAt = (str, index, letter) =>{
+    return str.substring(0, index) + letter + str.substring(index+1);
+}
+
+const render = () => {
+    let { answer, compareString} = setGame();
+    playGame(answer, compareString);
 }
 
 render();
