@@ -1,5 +1,5 @@
 html { 
-    background: url("./src/hangman_bottom.png") no-repeat center center fixed; 
+    background: url("../img/hangman_bottom.png") no-repeat center center fixed; 
   }
 
 body{
